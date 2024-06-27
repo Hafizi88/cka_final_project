@@ -13,7 +13,7 @@
     },
     methods: {
       getUsers(){
-        axios.get('{{ API_URL }}/api/users').then(res =>{
+        axios.get('{{ API_URL }}/api/articles').then(res =>{
           console.log(res);
         });
       }
@@ -25,13 +25,13 @@
   <div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
   <div class="flex items-center justify-between pb-6">
     <div>
-      <h2 class="font-semibold text-gray-700">User Accounts</h2>
+      <h2 class="font-semibold text-gray-700">List of articles</h2>
     </div>
     <div class="flex items-center justify-between">
       <div class="ml-10 space-x-8 lg:ml-40">
         <router-link :to="{ name: 'new' }">
           <button class="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
-            Create New User
+            Create New Articles
           </button>
         </router-link>
       </div>
@@ -43,8 +43,8 @@
         <thead>
           <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
             <th class="px-5 py-3">ID</th>
-            <th class="px-5 py-3">Full Name</th>
-            <th class="px-5 py-3">User Role</th>
+            <th class="px-5 py-3">Title</th>
+            <th class="px-5 py-3">User</th>
             <th class="px-5 py-3">Created at</th>
             <th class="px-5 py-3">Status</th>
           </tr>

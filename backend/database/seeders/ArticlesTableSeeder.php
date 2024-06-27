@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use  App\Models\User;
 use  App\Models\Article;
 
 class ArticlesTableSeeder extends Seeder
@@ -23,7 +24,8 @@ class ArticlesTableSeeder extends Seeder
             Article::create([
                 'title' => $faker->sentence,
                 'body' => $faker->paragraph,
-                'status' => 'Publish'
+                'user_id' => User::all()->random()->id,
+                'status' => $faker->randomElement(['Draft','Published', 'Closed'])
             ]);
         }
     }

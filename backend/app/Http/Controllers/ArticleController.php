@@ -8,7 +8,9 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        return Article::paginate();
+        return Article::with(['user' => function ($query) {
+            $query->select('id', 'name', 'email');
+        }])->paginate();
     }
 
     public function show(Article $article)

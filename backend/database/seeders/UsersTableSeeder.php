@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use  App\Models\User;
@@ -15,6 +16,7 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         // Let's clear the users table first
+        Schema::disableForeignKeyConstraints();
         User::truncate();
 
         $faker = \Faker\Factory::create();
@@ -38,5 +40,7 @@ class UsersTableSeeder extends Seeder
                 'password' => $password,
             ]);
         }
+
+        Schema::enableForeignKeyConstraints();
     }
 }
