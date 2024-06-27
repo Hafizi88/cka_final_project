@@ -8,8 +8,16 @@ import New from './views/New.vue'
 import List from './views/List.vue'
 
 const routes = [
-    { path: '/', component: New },
-    { path: '/list', component: List },
+    { 
+      path: '/'
+      , name : 'home'
+      , component: List 
+    },
+    { 
+      path: '/new'
+      , name : 'new'
+      , component: New 
+    },
   ]
 
 const router = createRouter({

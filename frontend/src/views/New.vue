@@ -7,7 +7,7 @@
       </div>
       <div class="flex items-center justify-between">
         <div class="ml-10 space-x-34 lg:ml-40">
-          <router-link to="/list">
+          <router-link :to="{ name: 'home' }">
             <button class="mr-2 flex items-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-semibold text-gray-500 sm:inline focus:outline-none focus:ring hover:bg-gray-200">Cancel</button>
           </router-link>
           <button class="hidden flex items-center rounded-md border-2 border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold  text-white sm:inline focus:outline-none focus:ring hover:bg-blue-700">Save</button>

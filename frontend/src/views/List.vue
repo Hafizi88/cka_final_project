@@ -1,5 +1,24 @@
-<script setup>
+<script >
+  import axios from "axios";
 
+  export default {
+    name: 'users',
+    data(){
+      return {
+        users: []
+      }
+    },
+    mounted(){
+      this.getUsers();
+    },
+    methods: {
+      getUsers(){
+        axios.get('{{ API_URL }}/api/users').then(res =>{
+          console.log(res);
+        });
+      }
+    }
+  };
 </script>
 
 <template>
@@ -10,7 +29,7 @@
     </div>
     <div class="flex items-center justify-between">
       <div class="ml-10 space-x-8 lg:ml-40">
-        <router-link to="/">
+        <router-link :to="{ name: 'new' }">
           <button class="flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700">
             Create New User
           </button>
@@ -31,106 +50,6 @@
           </tr>
         </thead>
         <tbody class="text-gray-500">
-          <tr>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">3</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="" alt="" />
-                </div>
-                <div class="ml-3">
-                  <p class="whitespace-no-wrap">Besique Monroe</p>
-                </div>
-              </div>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Administrator</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">7</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="" alt="" />
-                </div>
-                <div class="ml-3">
-                  <p class="whitespace-no-wrap">James Cavier</p>
-                </div>
-              </div>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Author</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span class="rounded-full bg-green-200 px-3 py-1 text-xs font-semibold text-green-900">Active</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">12</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="" alt="" />
-                </div>
-                <div class="ml-3">
-                  <p class="whitespace-no-wrap">Elvis Son</p>
-                </div>
-              </div>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Editor</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span class="rounded-full bg-yellow-200 px-3 py-1 text-xs font-semibold text-yellow-900">Suspended</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">66</p>
-            </td>
-            <td class="bg-white px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="" alt="" />
-                </div>
-                <div class="ml-3">
-                  <p class="whitespace-no-wrap">Dana White</p>
-                </div>
-              </div>
-            </td>
-            <td class="bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Administrator</p>
-            </td>
-            <td class="bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Sep 28, 2022</p>
-            </td>
-
-            <td class="bg-white px-5 py-5 text-sm">
-              <span class="rounded-full bg-red-200 px-3 py-1 text-xs font-semibold text-red-900">Inactive</span>
-            </td>
-          </tr>
           <tr>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <p class="whitespace-no-wrap">12</p>
