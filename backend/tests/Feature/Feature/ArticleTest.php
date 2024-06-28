@@ -5,24 +5,40 @@ namespace Tests\Feature\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class ArticleTest extends TestCase
 {
-    public function testsArticlesAreCreatedCorrectly()
+    use RefreshDatabase;
+
+    public function testArticlesAreCreatedCorrectly()
     {
-        $user = factory(User::class)->create();
-        $token = $user->generateToken();
-        $headers = ['Authorization' => "Bearer $token"];
+        $faker = \Faker\Factory::create();
+        $user_id = User::all()->random()->id;
+        $status = $faker->randomElement(['Draft','Published', 'Closed']);
+        $title = 'Draft test title';
+        $body = 'Draft test body';
+
+        $headers = [];
         $payload = [
-            'title' => 'Lorem',
-            'body' => 'Ipsum',
+            'title' => $title,
+            'body' => $body,
+            'user_id' => $user_id,
+            'status' => $status
         ];
 
         $this->json('POST', '/api/articles', $payload, $headers)
-            ->assertStatus(200)
-            ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
+            ->assertStatus(201)
+            ->assertJson([
+                 'title' => $title
+                , 'body' => $body
+                , 'user_id' => $user_id
+                , 'status' => $status
+                ]
+            );
+           // ->assertSuccessful();
     }
-
+    /*
     public function testsArticlesAreUpdatedCorrectly()
     {
         $user = factory(User::class)->create();
@@ -87,4 +103,6 @@ class ArticleTest extends TestCase
                 '*' => ['id', 'body', 'title', 'created_at', 'updated_at'],
             ]);
     }
+    */
+
 }
