@@ -22,8 +22,8 @@ class ArticlesTableSeeder extends Seeder
         // And now, let's create a few articles in our database:
         for ($i = 0; $i < 50; $i++) {
             Article::create([
-                'title' => $faker->sentence,
-                'body' => $faker->paragraph,
+                'title' => $faker->sentence(3),
+                'body' => $faker->paragraph(20),
                 'user_id' => User::all()->random()->id,
                 'status' => $faker->randomElement(['Draft','Published', 'Closed'])
             ]);

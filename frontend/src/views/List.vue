@@ -2,19 +2,19 @@
   import axios from "axios";
 
   export default {
-    name: 'users',
+    name: 'articles',
     data(){
       return {
-        users: []
+        articles: []
       }
     },
     mounted(){
-      this.getUsers();
+      this.getArticles();
     },
     methods: {
-      getUsers(){
-        axios.get('{{ API_URL }}/api/articles').then(res =>{
-          console.log(res);
+      getArticles(){
+        axios.get('http://127.0.0.1:8000/api/articles').then(res =>{
+          this.articles = res.data.data
         });
       }
     }
@@ -41,38 +41,52 @@
     <div class="overflow-x-auto">
       <table class="w-full">
         <thead>
-          <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+          <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white text-center">
             <th class="px-5 py-3">ID</th>
             <th class="px-5 py-3">Title</th>
             <th class="px-5 py-3">User</th>
             <th class="px-5 py-3">Created at</th>
             <th class="px-5 py-3">Status</th>
+            <th class="px-5 py-3"></th>
           </tr>
         </thead>
         <tbody class="text-gray-500">
-          <tr>
+          <tr v-for="(article , index) in this.articles">
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">12</p>
+              <p class="whitespace-no-wrap">{{ article.id }}</p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <div class="flex items-center">
                 <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="" alt="" />
+                  <!-- <img class="h-full w-full rounded-full" src="" alt="" /> -->
                 </div>
                 <div class="ml-3">
-                  <p class="whitespace-no-wrap">Elvis Son</p>
+                  <p class="whitespace-no-wrap">{{ article.title }}</p>
                 </div>
               </div>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Editor</p>
+              <p class="whitespace-no-wrap">{{ article.user.name }}</p>
             </td>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">Sep 28, 2022</p>
+              <p class="whitespace-no-wrap">{{ article.created_at }}</p>
             </td>
 
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <span class="rounded-full bg-yellow-200 px-3 py-1 text-xs font-semibold text-yellow-900">Suspended</span>
+              <span 
+              class="rounded-full px-3 py-1 text-xs font-semibold "
+              :class="{ 
+                'bg-yellow-200 text-yellow-900': (article.status == 'Draft') 
+              , 'bg-green-200 text-green-900': (article.status == 'Published')
+              , 'bg-red-200 text-red-900': (article.status == 'Closed')
+              }"
+              >{{ article.status }}</span>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <div class="ml-10 space-x-34 lg:ml-1">
+                <router-link :to="{ name: 'home' }" class="mr-2 flex items-center gap-2 rounded-md border-2 px-4 py-2 text-sm font-semibold text-gray-500 sm:inline focus:outline-none focus:ring hover:bg-gray-200">Cancel</router-link>
+                <router-link class="hidden flex items-center rounded-md border-2 border-transparent bg-blue-600 px-4 py-2 text-sm font-semibold  text-white sm:inline focus:outline-none focus:ring hover:bg-blue-700">Save</router-link>
+              </div>
             </td>
           </tr>
         </tbody>
